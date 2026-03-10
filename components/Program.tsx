@@ -14,7 +14,7 @@ import {
   RotateCcw,
   BookOpen,
   TrendingUp,
-  Award,
+  FileCheck,
 } from "lucide-react";
 
 type Tab = "beginner" | "advanced";
@@ -23,49 +23,56 @@ const beginnerModules = [
   {
     icon: BookOpen,
     title: "Фундамент без воды",
-    description: "Строение ногтя, стерилизация, инструменты. Разница геля и гель-лака — почему мы навсегда прощаемся со вторым.",
+    description:
+      "Строение ногтя, стерилизация, инструменты. Разница геля и гель-лака — почему мы навсегда прощаемся со вторым.",
     span: "col-span-1",
     accent: true,
   },
   {
     icon: Wrench,
     title: "Аппарат — твой лучший друг",
-    description: "Фрезы, обороты, техника. Безупречная кутикула с первого раза.",
+    description:
+      "Фрезы, обороты, техника. Безупречная кутикула с первого раза.",
     span: "col-span-1",
     accent: false,
   },
   {
     icon: Layers,
     title: "Архитектура без мучений",
-    description: "Апекс, арки, выкладка. Превращаем непонятный термин в навык, который даёт +2 000₽ к чеку.",
+    description:
+      "Апекс, арки, выкладка. Превращаем непонятный термин в навык, который даёт +2 000₽ к чеку.",
     span: "col-span-1 sm:col-span-2",
     accent: true,
   },
   {
     icon: PenTool,
     title: "Опил, который решает",
-    description: "Выкладка → полимеризация → опил формы → свободный край изнутри. Секрет носки 4+ недель.",
+    description:
+      "Выкладка → полимеризация → опил формы → свободный край изнутри. Секрет носки 4+ недель.",
     span: "col-span-1",
     accent: false,
   },
   {
     icon: Palette,
     title: "Цвет и дизайн",
-    description: "Французский, градиент, блёстки. Покрытие поверх геля — чистое декоративное искусство.",
+    description:
+      "Французский, градиент, блёстки. Покрытие поверх геля — чистое декоративное искусство.",
     span: "col-span-1",
     accent: false,
   },
   {
     icon: Gauge,
     title: "Скорость без потери качества",
-    description: "Полный цикл на модели от снятия до финиша. Учимся работать быстро и без ошибок.",
+    description:
+      "Полный цикл на модели от снятия до финиша. Учимся работать быстро и без ошибок.",
     span: "col-span-1",
     accent: false,
   },
   {
-    icon: Award,
-    title: "Экзамен и диплом",
-    description: "Самостоятельная работа на модели. Разбор ошибок. Как найти первых клиентов. Диплом — в руки.",
+    icon: FileCheck,
+    title: "Экзамен и сертификат",
+    description:
+      "Самостоятельная работа на модели. Разбор ошибок. Как найти первых клиентов. Сертификат — в руки.",
     span: "col-span-1 sm:col-span-2",
     accent: true,
   },
@@ -75,42 +82,48 @@ const advancedModules = [
   {
     icon: RotateCcw,
     title: "Перезагрузка мышления",
-    description: "Почему гель-лак — прошлый век. Материаловедение: как гель меняет подход к работе на 180°.",
+    description:
+      "Почему гель-лак — прошлый век. Материаловедение: как гель меняет подход к работе на 180°.",
     span: "col-span-1 sm:col-span-2",
     accent: true,
   },
   {
     icon: Layers,
     title: "Архитектура уровня PRO",
-    description: "Апекс, боковые и продольные арки. Разбор на вашем уровне — не с нуля, а с точки, где вы сейчас.",
+    description:
+      "Апекс, боковые и продольные арки. Разбор на вашем уровне — не с нуля, а с точки, где вы сейчас.",
     span: "col-span-1",
     accent: false,
   },
   {
     icon: Scissors,
     title: "Опил как искусство",
-    description: "Выкладка → опил сверху → свободный край изнутри. Разница в носке — катастрофическая.",
+    description:
+      "Выкладка → опил сверху → свободный край изнутри. Разница в носке — катастрофическая.",
     span: "col-span-1",
     accent: false,
   },
   {
     icon: ShieldCheck,
     title: "Проблемные ногти",
-    description: "Тонкие, ломкие, трамплин, онихолизис. Ремонт и коррекция — без паники.",
+    description:
+      "Тонкие, ломкие, трамплин, онихолизис. Ремонт и коррекция — без паники.",
     span: "col-span-1",
     accent: false,
   },
   {
     icon: TrendingUp,
-    title: "Скорость + Разбор ваших работ",
-    description: "Принесите фото своих работ. Разберём каждую ошибку. Увеличим скорость без потери качества.",
+    title: "Разбор ваших работ",
+    description:
+      "Принесите фото своих работ. Разберём каждую ошибку. Увеличим скорость без потери качества.",
     span: "col-span-1",
     accent: true,
   },
   {
     icon: Sparkles,
-    title: "Индивидуальная отработка",
-    description: "Работа над вашими слабыми местами. Практика на модели. Сертификат повышения квалификации.",
+    title: "Практика и сертификат",
+    description:
+      "Отработка на модели. Работа над вашими слабыми местами. Сертификат повышения квалификации.",
     span: "col-span-1 sm:col-span-2",
     accent: false,
   },
@@ -124,7 +137,10 @@ export default function Program() {
   const modules = activeTab === "beginner" ? beginnerModules : advancedModules;
 
   return (
-    <section id="program" className="relative section-padding">
+    <section
+      id="program"
+      className="relative section-padding bg-gradient-to-b from-surface via-accent/[0.02] to-surface"
+    >
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-surface-border to-transparent" />
       <div className="absolute left-0 top-1/2 w-[300px] h-[300px] bg-accent/5 rounded-full blur-[100px]" />
 
@@ -140,7 +156,10 @@ export default function Program() {
             Программа
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-5">
-            Не <span className="line-through text-text-muted">теория из YouTube</span>
+            Не{" "}
+            <span className="line-through text-text-muted">
+              теория из YouTube
+            </span>
             <br />
             <span className="text-gradient">Система, которая работает</span>
           </h2>
@@ -156,25 +175,29 @@ export default function Program() {
           <div className="inline-flex p-1.5 rounded-2xl bg-surface-card border border-surface-border">
             <button
               onClick={() => setActiveTab("beginner")}
-              className={`px-5 sm:px-8 py-3 rounded-xl text-sm font-semibold transition-all duration-300 ${
+              className={`px-4 sm:px-8 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ${
                 activeTab === "beginner"
                   ? "bg-gradient-accent text-white shadow-lg shadow-accent/20"
                   : "text-text-secondary hover:text-white"
               }`}
             >
-              <span className="hidden sm:inline">🚀 </span>
-              Топ-мастер за 7 дней
+              <span className="sm:hidden">🚀 За 7 дней</span>
+              <span className="hidden sm:inline">
+                🚀 Топ-мастер за 7 дней
+              </span>
             </button>
             <button
               onClick={() => setActiveTab("advanced")}
-              className={`px-5 sm:px-8 py-3 rounded-xl text-sm font-semibold transition-all duration-300 ${
+              className={`px-4 sm:px-8 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ${
                 activeTab === "advanced"
                   ? "bg-gradient-accent text-white shadow-lg shadow-accent/20"
                   : "text-text-secondary hover:text-white"
               }`}
             >
-              <span className="hidden sm:inline">⚡ </span>
-              Повышение квалификации
+              <span className="sm:hidden">⚡ Квалификация</span>
+              <span className="hidden sm:inline">
+                ⚡ Повышение квалификации
+              </span>
             </button>
           </div>
         </motion.div>
@@ -209,7 +232,9 @@ export default function Program() {
                 >
                   <mod.icon
                     className={`w-5 h-5 ${
-                      mod.accent ? "text-accent" : "text-text-secondary group-hover:text-accent"
+                      mod.accent
+                        ? "text-accent"
+                        : "text-text-secondary group-hover:text-accent"
                     } transition-colors`}
                   />
                 </div>
@@ -232,22 +257,28 @@ export default function Program() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-8 glass-card p-6 sm:p-8"
         >
-          <div className="grid sm:grid-cols-3 gap-6 text-center">
+          <div className="grid grid-cols-3 gap-4 sm:gap-6 text-center">
             <div>
-              <div className="text-2xl font-bold text-accent mb-1">
-                {activeTab === "beginner" ? "7 дней" : "2-3 дня"}
+              <div className="text-xl sm:text-2xl font-bold text-accent mb-1">
+                {activeTab === "beginner" ? "7 дней" : "1 день"}
               </div>
-              <div className="text-sm text-text-secondary">Длительность</div>
+              <div className="text-xs sm:text-sm text-text-secondary">
+                Длительность
+              </div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-accent mb-1">
+              <div className="text-xl sm:text-2xl font-bold text-accent mb-1">
                 {activeTab === "beginner" ? "до 3 чел" : "1-2 чел"}
               </div>
-              <div className="text-sm text-text-secondary">В группе</div>
+              <div className="text-xs sm:text-sm text-text-secondary">
+                В группе
+              </div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-accent mb-1">Очно</div>
-              <div className="text-sm text-text-secondary">
+              <div className="text-xl sm:text-2xl font-bold text-accent mb-1">
+                Очно
+              </div>
+              <div className="text-xs sm:text-sm text-text-secondary">
                 Москва, Березовая аллея, 7Б
               </div>
             </div>
