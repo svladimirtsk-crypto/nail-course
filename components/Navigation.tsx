@@ -23,11 +23,10 @@ export default function Navigation() {
   }, []);
 
   useEffect(() => {
-    if (isMobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
+    document.body.style.overflow = isMobileOpen ? "hidden" : "";
+    return () => {
       document.body.style.overflow = "";
-    }
+    };
   }, [isMobileOpen]);
 
   return (
@@ -44,7 +43,6 @@ export default function Navigation() {
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 sm:h-20">
-            {/* Logo */}
             <a href="#" className="flex items-center gap-2 group">
               <div className="w-8 h-8 rounded-lg bg-gradient-accent flex items-center justify-center group-hover:shadow-[0_0_20px_rgba(255,45,123,0.5)] transition-shadow duration-300">
                 <Sparkles className="w-4 h-4 text-white" />
@@ -54,7 +52,6 @@ export default function Navigation() {
               </span>
             </a>
 
-            {/* Desktop Links */}
             <div className="hidden md:flex items-center gap-1">
               {navLinks.map((link) => (
                 <a
@@ -67,7 +64,6 @@ export default function Navigation() {
               ))}
             </div>
 
-            {/* Desktop CTA */}
             <a
               href="#enroll"
               className="hidden md:block text-sm font-semibold px-5 py-2.5 rounded-xl bg-gradient-accent text-white hover:shadow-[0_0_30px_rgba(255,45,123,0.3)] transition-all duration-300"
@@ -75,10 +71,10 @@ export default function Navigation() {
               Занять место
             </a>
 
-            {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMobileOpen(!isMobileOpen)}
               className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-surface-elevated/50 border border-surface-border/50"
+              aria-label="Меню"
             >
               {isMobileOpen ? (
                 <X className="w-5 h-5" />
@@ -90,7 +86,6 @@ export default function Navigation() {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileOpen && (
           <motion.div
