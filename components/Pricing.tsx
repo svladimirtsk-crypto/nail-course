@@ -5,46 +5,23 @@ import { useRef } from "react";
 import {
   Rocket,
   Zap,
-  CheckCircle2,
   ArrowRight,
   Crown,
   Clock,
   Users,
   BookOpen,
   Wrench,
-  Award,
+  FileCheck,
   MessageCircle,
   Target,
   Layers,
   Scissors,
   BarChart3,
-  FileCheck,
+  ShieldCheck,
+  Package,
 } from "lucide-react";
 
 const plans = [
-  {
-    id: "advanced",
-    icon: Zap,
-    badge: null,
-    name: "Повышение квалификации",
-    tagline: "Для действующих мастеров",
-    price: "10 000",
-    period: "за курс",
-    description:
-      "Ты уже работаешь, но хочешь перейти на гель и увеличить чек. Индивидуальный формат — разберём именно твои ошибки.",
-    features: [
-      { icon: Clock, text: "2-3 дня обучения" },
-      { icon: Users, text: "Индивидуально / до 2 человек" },
-      { icon: Layers, text: "Архитектура и выкладка геля" },
-      { icon: Scissors, text: "Опил свободного края изнутри" },
-      { icon: Wrench, text: "Работа с проблемными ногтями" },
-      { icon: BarChart3, text: "Разбор ваших работ по фото" },
-      { icon: Target, text: "Практика на моделях" },
-      { icon: FileCheck, text: "Сертификат повышения квалификации" },
-      { icon: MessageCircle, text: "Поддержка после курса" },
-    ],
-    accent: false,
-  },
   {
     id: "beginner",
     icon: Rocket,
@@ -53,6 +30,7 @@ const plans = [
     tagline: "С нуля до первых клиентов",
     price: "45 000",
     period: "за курс",
+    perDay: "≈ 6 400₽/день обучения",
     description:
       "Полный интенсив для тех, кто начинает с абсолютного нуля. За 7 дней — от «никогда не держала аппарат» до «могу работать с клиентами».",
     features: [
@@ -63,12 +41,36 @@ const plans = [
       { icon: Layers, text: "Гель, архитектура, выкладка" },
       { icon: Scissors, text: "Техника опила и свободный край" },
       { icon: Target, text: "Работа на моделях с 3-го дня" },
-      { icon: Award, text: "Диплом гос. образца" },
-      { icon: Wrench, text: "Все материалы и инструменты включены" },
+      { icon: Package, text: "Все материалы включены" },
+      { icon: FileCheck, text: "Сертификат по окончании" },
       { icon: MessageCircle, text: "Чат поддержки после выпуска" },
-      { icon: FileCheck, text: "Список материалов для старта" },
     ],
     accent: true,
+  },
+  {
+    id: "advanced",
+    icon: Zap,
+    badge: null,
+    name: "Повышение квалификации",
+    tagline: "Для действующих мастеров",
+    price: "10 000",
+    period: "за курс",
+    perDay: "Окупается за 3-4 процедуры",
+    description:
+      "Ты уже работаешь, но хочешь перейти на гель и увеличить чек. Индивидуальный формат — разберём именно твои ошибки.",
+    features: [
+      { icon: Clock, text: "1 день интенсива" },
+      { icon: Users, text: "Индивидуально / до 2 человек" },
+      { icon: Layers, text: "Архитектура и выкладка геля" },
+      { icon: Scissors, text: "Опил свободного края изнутри" },
+      { icon: ShieldCheck, text: "Работа с проблемными ногтями" },
+      { icon: BarChart3, text: "Разбор ваших работ по фото" },
+      { icon: Target, text: "Практика на моделях" },
+      { icon: Package, text: "Все материалы включены" },
+      { icon: FileCheck, text: "Сертификат повышения квалификации" },
+      { icon: MessageCircle, text: "Поддержка после курса" },
+    ],
+    accent: false,
   },
 ];
 
@@ -87,7 +89,7 @@ export default function Pricing() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
           <span className="text-accent text-sm font-semibold uppercase tracking-widest mb-4 block">
             Тарифы
@@ -97,13 +99,13 @@ export default function Pricing() {
             <br />
             <span className="text-gradient">окупается за неделю</span>
           </h2>
-          <p className="text-text-secondary text-lg max-w-xl mx-auto">
+          <p className="text-text-secondary text-base sm:text-lg max-w-xl mx-auto">
             Средний мастер в Москве зарабатывает 150 000–300 000 ₽/мес.
             Посчитайте сами.
           </p>
         </motion.div>
 
-        {/* Cards */}
+        {/* Cards — дорогой ПЕРВЫЙ */}
         <div className="grid md:grid-cols-2 gap-5 sm:gap-6 max-w-4xl mx-auto">
           {plans.map((plan, i) => (
             <motion.div
@@ -117,7 +119,6 @@ export default function Pricing() {
                   : "border border-surface-border"
               }`}
             >
-              {/* Popular Badge */}
               {plan.badge && (
                 <div className="bg-gradient-accent text-white text-xs font-bold text-center py-2 tracking-wider">
                   <Crown className="w-3.5 h-3.5 inline mr-1.5 -mt-0.5" />
@@ -157,7 +158,14 @@ export default function Pricing() {
                     </span>
                     <span className="text-lg text-text-muted">₽</span>
                   </div>
-                  <span className="text-sm text-text-muted">{plan.period}</span>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="text-sm text-text-muted">
+                      {plan.period}
+                    </span>
+                    <span className="text-xs text-text-muted bg-surface-elevated px-2 py-0.5 rounded">
+                      {plan.perDay}
+                    </span>
+                  </div>
                 </div>
 
                 {/* Description */}
@@ -168,7 +176,10 @@ export default function Pricing() {
                 {/* Features */}
                 <div className="space-y-3 mb-8">
                   {plan.features.map((feature) => (
-                    <div key={feature.text} className="flex items-center gap-3">
+                    <div
+                      key={feature.text}
+                      className="flex items-center gap-3"
+                    >
                       <feature.icon
                         className={`w-4 h-4 shrink-0 ${
                           plan.accent ? "text-accent" : "text-text-muted"
