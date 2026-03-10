@@ -19,6 +19,7 @@ import {
   BarChart3,
   ShieldCheck,
   Package,
+  Phone,
 } from "lucide-react";
 
 const plans = [
@@ -105,7 +106,7 @@ export default function Pricing() {
           </p>
         </motion.div>
 
-        {/* Cards — дорогой ПЕРВЫЙ */}
+        {/* Cards */}
         <div className="grid md:grid-cols-2 gap-5 sm:gap-6 max-w-4xl mx-auto">
           {plans.map((plan, i) => (
             <motion.div
@@ -131,7 +132,6 @@ export default function Pricing() {
                   plan.accent ? "bg-accent/[0.04]" : "bg-surface-card"
                 }`}
               >
-                {/* Plan Header */}
                 <div className="flex items-center gap-3 mb-4">
                   <div
                     className={`w-10 h-10 rounded-xl flex items-center justify-center ${
@@ -150,7 +150,6 @@ export default function Pricing() {
                   </div>
                 </div>
 
-                {/* Price */}
                 <div className="mb-5">
                   <div className="flex items-baseline gap-1">
                     <span className="text-4xl sm:text-5xl font-black">
@@ -168,12 +167,10 @@ export default function Pricing() {
                   </div>
                 </div>
 
-                {/* Description */}
                 <p className="text-text-secondary text-sm leading-relaxed mb-6 pb-6 border-b border-surface-border/50">
                   {plan.description}
                 </p>
 
-                {/* Features */}
                 <div className="space-y-3 mb-8">
                   {plan.features.map((feature) => (
                     <div
@@ -192,24 +189,32 @@ export default function Pricing() {
                   ))}
                 </div>
 
-                {/* CTA */}
-                <a
-                  href="#enroll"
-                  className={`w-full flex items-center justify-center gap-2 py-4 rounded-xl font-semibold transition-all duration-300 ${
-                    plan.accent
-                      ? "btn-primary"
-                      : "bg-surface-elevated border border-surface-border text-white hover:border-accent/50 hover:bg-accent/5"
-                  }`}
-                >
-                  Записаться
-                  <ArrowRight className="w-4 h-4" />
-                </a>
+                {/* CTA buttons */}
+                <div className="space-y-3">
+                  <a
+                    href="#enroll"
+                    className={`w-full flex items-center justify-center gap-2 py-4 rounded-xl font-semibold transition-all duration-300 ${
+                      plan.accent
+                        ? "btn-primary"
+                        : "bg-surface-elevated border border-surface-border text-white hover:border-accent/50 hover:bg-accent/5"
+                    }`}
+                  >
+                    Записаться
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                  <a
+                    href="tel:+79999777655"
+                    className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm text-text-muted hover:text-white border border-surface-border/50 hover:border-accent/30 transition-all duration-300"
+                  >
+                    <Phone className="w-4 h-4" />
+                    Или позвоните: +7 999 977-76-55
+                  </a>
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Installment Note */}
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
