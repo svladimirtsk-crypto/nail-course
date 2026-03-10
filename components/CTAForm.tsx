@@ -23,14 +23,48 @@ export default function CTAForm() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Заменить на реальный API
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+    setError("");
+
+    const courseName =
+      formData.course === "beginner"
+        ? "Топ-мастер за 7 дней (45 000₽)"
+        : "Повышение квалификации (10 000₽)";
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "12216bf8-97dc-4b7c-9fec-879afe4a04f9",
+          subject: `Новая заявка на курс: ${courseName}`,
+          from_name: "ELENA.NAIL Landing",
+          name: formData.name,
+          phone: formData.phone,
+          course: courseName,
+          message: `Имя: ${formData.name}\nТелефон/Telegram: ${formData.phone}\nКурс: ${courseName}`,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setIsSubmitted(true);
+      } else {
+        setError("Ошибка отправки. Попробуйте ещё раз или позвоните нам.");
+      }
+    } catch {
+      setError("Ошибка сети. Попробуйте ещё раз или позвоните нам.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -76,6 +110,7 @@ export default function CTAForm() {
             className="glass-card p-6 sm:p-8 lg:p-10"
           >
             {isSubmitted ? (
+              /* ===================== SUCCESS STATE ===================== */
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -94,7 +129,7 @@ export default function CTAForm() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <a
-                    href="https://t.me/"
+                    href="https://t.me/kogotkimsk"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium hover:bg-blue-500/20 transition-all"
@@ -103,19 +138,36 @@ export default function CTAForm() {
                     Написать в Telegram
                   </a>
                   <a
-                    href="https://wa.me/79001234567"
+                    href="https://wa.me/79999777655"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 text-sm font-medium hover:bg-green-500/20 transition-all"
                   >
-                    <Phone className="w-4 h-4" />
+                    <MessageCircle className="w-4 h-4" />
                     Написать в WhatsApp
+                  </a>
+                  <a
+                    href="tel:+79999777655"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-surface-elevated border border-surface-border text-text-secondary text-sm font-medium hover:text-white hover:border-accent/30 transition-all"
+                  >
+                    <Phone className="w-4 h-4" />
+                    Позвонить
                   </a>
                 </div>
               </motion.div>
             ) : (
+              /* ===================== FORM ===================== */
               <>
                 <form onSubmit={handleSubmit} className="space-y-5">
+                  {/* Hidden fields for web3forms */}
+                  <input
+                    type="hidden"
+                    name="access_key"
+                    value="12216bf8-97dc-4b7c-9fec-879afe4a04f9"
+                  />
+                  <input type="hidden" name="subject" value="Новая заявка с лендинга ELENA.NAIL" />
+                  <input type="checkbox" name="botcheck" className="hidden" />
+
                   {/* Name */}
                   <div>
                     <label
@@ -203,6 +255,13 @@ export default function CTAForm() {
                     </div>
                   </div>
 
+                  {/* Error message */}
+                  {error && (
+                    <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm text-center">
+                      {error}
+                    </div>
+                  )}
+
                   {/* Submit */}
                   <button
                     type="submit"
@@ -223,19 +282,31 @@ export default function CTAForm() {
                   </button>
 
                   <p className="text-center text-text-muted text-xs">
-                    Нажимая кнопку, вы соглашаетесь на обработку персональных
-                    данных
+                    Нажимая кнопку, вы соглашаетесь с{" "}
+                    <a
+                      href="/privacy"
+                      className="underline underline-offset-2 hover:text-white transition-colors"
+                    >
+                      политикой конфиденциальности
+                    </a>{" "}
+                    и{" "}
+                    <a
+                      href="/offer"
+                      className="underline underline-offset-2 hover:text-white transition-colors"
+                    >
+                      офертой
+                    </a>
                   </p>
                 </form>
 
                 {/* Alternative CTA */}
                 <div className="mt-6 pt-6 border-t border-surface-border/30">
                   <p className="text-center text-text-muted text-sm mb-4">
-                    Или напишите напрямую:
+                    Или свяжитесь напрямую:
                   </p>
                   <div className="flex gap-3">
                     <a
-                      href="https://wa.me/79001234567"
+                      href="https://wa.me/79999777655"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-green-600/10 border border-green-600/20 text-green-400 text-sm font-medium hover:bg-green-600/20 transition-all"
@@ -244,13 +315,20 @@ export default function CTAForm() {
                       WhatsApp
                     </a>
                     <a
-                      href="https://t.me/"
+                      href="https://t.me/kogotkimsk"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium hover:bg-blue-500/20 transition-all"
                     >
                       <MessageCircle className="w-4 h-4" />
                       Telegram
+                    </a>
+                    <a
+                      href="tel:+79999777655"
+                      className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-surface-elevated border border-surface-border text-text-secondary text-sm font-medium hover:text-white hover:border-accent/30 transition-all"
+                    >
+                      <Phone className="w-4 h-4" />
+                      Звонок
                     </a>
                   </div>
                 </div>
@@ -270,6 +348,13 @@ export default function CTAForm() {
               <MapPin className="w-4 h-4" />
               Москва, Березовая аллея, 7Б
             </span>
+            <a
+              href="tel:+79999777655"
+              className="flex items-center gap-2 hover:text-accent transition-colors"
+            >
+              <Phone className="w-4 h-4" />
+              +7 999 977-76-55
+            </a>
           </motion.div>
         </div>
       </div>
