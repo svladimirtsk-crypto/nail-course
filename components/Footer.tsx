@@ -1,10 +1,17 @@
-"use client";
-
 import { Sparkles, Heart } from "lucide-react";
 
+const footerLinks = [
+  { href: "#for-whom", label: "Для кого" },
+  { href: "#author", label: "Автор" },
+  { href: "#program", label: "Программа" },
+  { href: "#pricing", label: "Тарифы" },
+];
+
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="relative py-12 px-5">
+    <footer className="relative py-12 px-5 pb-24 sm:pb-12">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-surface-border to-transparent" />
 
       <div className="max-w-6xl mx-auto">
@@ -21,26 +28,20 @@ export default function Footer() {
 
           {/* Links */}
           <div className="flex items-center gap-6 text-sm text-text-muted">
-            <a
-              href="#for-whom"
-              className="hover:text-white transition-colors"
-            >
-              Для кого
-            </a>
-            <a href="#author" className="hover:text-white transition-colors">
-              Автор
-            </a>
-            <a href="#program" className="hover:text-white transition-colors">
-              Программа
-            </a>
-            <a href="#pricing" className="hover:text-white transition-colors">
-              Тарифы
-            </a>
+            {footerLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="hover:text-white transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
 
           {/* Copy */}
           <div className="text-xs text-text-muted flex items-center gap-1">
-            © {new Date().getFullYear()} · Сделано с
+            © {currentYear} · Сделано с
             <Heart className="w-3 h-3 text-accent" />
           </div>
         </div>
