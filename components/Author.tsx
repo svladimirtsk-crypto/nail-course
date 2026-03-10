@@ -74,7 +74,7 @@ export default function Author() {
             <div className="relative mb-8">
               <div className="aspect-[4/5] rounded-3xl overflow-hidden border border-surface-border">
                 <Image
-                  src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=80"
+                  src="/author.jpg"
                   alt="Инструктор Елена за работой"
                   fill
                   className="object-cover"
