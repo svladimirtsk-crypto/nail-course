@@ -1,4 +1,4 @@
-import { Sparkles, Heart } from "lucide-react";
+import { Sparkles, Heart, Phone, MessageCircle } from "lucide-react";
 
 const footerLinks = [
   { href: "#for-whom", label: "Для кого" },
@@ -46,11 +46,38 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Info */}
-        <div className="mt-8 pt-6 border-t border-surface-border/30 text-center">
-          <p className="text-xs text-text-muted leading-relaxed max-w-lg mx-auto">
-            ИП Елена · ИНН: XXX · ОГРНИП: XXX
-            <br />
+        {/* Contact row */}
+        <div className="mt-8 pt-6 border-t border-surface-border/30 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+          <a
+            href="tel:+79999777655"
+            className="flex items-center gap-2 text-sm text-text-muted hover:text-white transition-colors"
+          >
+            <Phone className="w-4 h-4" />
+            +7 999 977-76-55
+          </a>
+          <a
+            href="https://t.me/kogotkimsk"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-sm text-text-muted hover:text-white transition-colors"
+          >
+            <MessageCircle className="w-4 h-4" />
+            Telegram
+          </a>
+          <a
+            href="https://wa.me/79999777655"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-sm text-text-muted hover:text-white transition-colors"
+          >
+            <MessageCircle className="w-4 h-4" />
+            WhatsApp
+          </a>
+        </div>
+
+        {/* Legal */}
+        <div className="mt-6 text-center">
+          <p className="text-xs text-text-muted leading-relaxed">
             Москва, Березовая аллея, 7Б ·{" "}
             <a
               href="/privacy"
