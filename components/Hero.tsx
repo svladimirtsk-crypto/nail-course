@@ -13,7 +13,20 @@ const stats = [
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Effects */}
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <Image
+          src="/hero-bg.jpg"
+          alt=""
+          fill
+          className="object-cover opacity-30"
+          priority
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-surface/60 via-surface/80 to-surface" />
+      </div>
+
+      {/* Glow Effects */}
       <div className="absolute inset-0 bg-gradient-hero" />
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[120px] animate-pulse-glow" />
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
@@ -27,18 +40,6 @@ export default function Hero() {
           backgroundSize: "60px 60px",
         }}
       />
-
-      {/* Decorative nail image — right side, desktop only */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/3 h-3/4 hidden lg:block opacity-20 pointer-events-none">
-        <Image
-          src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=800&q=80"
-          alt=""
-          fill
-          className="object-cover rounded-l-3xl mask-fade-left"
-          priority={false}
-        />
-        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-surface/50 to-surface" />
-      </div>
 
       <div className="relative z-10 container-narrow section-padding pt-28 sm:pt-32">
         <div className="text-center max-w-4xl mx-auto">
