@@ -20,7 +20,6 @@ export default function CTAForm() {
     name: "",
     phone: "",
     course: "beginner",
-    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -28,20 +27,18 @@ export default function CTAForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    // Имитация отправки — заменить на реальный API
+    // Заменить на реальный API
     await new Promise((resolve) => setTimeout(resolve, 1500));
-
     setIsSubmitting(false);
     setIsSubmitted(true);
   };
 
   return (
-    <section id="enroll" className="relative section-padding overflow-hidden">
+    <section
+      id="enroll"
+      className="relative section-padding overflow-hidden bg-gradient-to-b from-surface via-accent/[0.05] to-surface"
+    >
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-surface-border to-transparent" />
-
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-hero opacity-50" />
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-accent/5 rounded-full blur-[120px]" />
 
       <div className="container-narrow relative" ref={ref}>
@@ -51,7 +48,7 @@ export default function CTAForm() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7 }}
-            className="text-center mb-12"
+            className="text-center mb-10"
           >
             <motion.div
               initial={{ scale: 0 }}
@@ -65,13 +62,13 @@ export default function CTAForm() {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-5">
               Готова <span className="text-gradient">начать</span>?
             </h2>
-            <p className="text-text-secondary text-lg">
+            <p className="text-text-secondary text-base sm:text-lg">
               Заполни форму — Елена свяжется в течение 2 часов
               <br className="hidden sm:block" />и ответит на все вопросы лично
             </p>
           </motion.div>
 
-          {/* Form */}
+          {/* Form Card */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -79,16 +76,17 @@ export default function CTAForm() {
             className="glass-card p-6 sm:p-8 lg:p-10"
           >
             {isSubmitted ? (
-              /* Success State */
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="text-center py-10"
+                className="text-center py-8"
               >
                 <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mx-auto mb-5">
                   <CheckCircle2 className="w-8 h-8 text-green-400" />
                 </div>
-                <h3 className="text-2xl font-bold mb-3">Заявка отправлена!</h3>
+                <h3 className="text-2xl font-bold mb-3">
+                  Заявка отправлена!
+                </h3>
                 <p className="text-text-secondary mb-6">
                   Елена свяжется с вами в течение 2 часов.
                   <br />
@@ -99,155 +97,164 @@ export default function CTAForm() {
                     href="https://t.me/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-surface-elevated border border-surface-border text-sm font-medium hover:border-accent/50 transition-all"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium hover:bg-blue-500/20 transition-all"
                   >
                     <MessageCircle className="w-4 h-4" />
                     Написать в Telegram
                   </a>
                   <a
-                    href="tel:+79001234567"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-surface-elevated border border-surface-border text-sm font-medium hover:border-accent/50 transition-all"
+                    href="https://wa.me/79001234567"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 text-sm font-medium hover:bg-green-500/20 transition-all"
                   >
                     <Phone className="w-4 h-4" />
-                    Позвонить
+                    Написать в WhatsApp
                   </a>
                 </div>
               </motion.div>
             ) : (
-              /* Form */
-              <form onSubmit={handleSubmit} className="space-y-5">
-                {/* Name */}
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium mb-2 text-text-secondary"
-                  >
-                    Ваше имя
-                  </label>
-                  <input
-                    id="name"
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                    placeholder="Как вас зовут?"
-                    className="w-full px-5 py-3.5 rounded-xl bg-surface-elevated border border-surface-border text-white placeholder:text-text-muted focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all duration-200"
-                  />
-                </div>
-
-                {/* Phone */}
-                <div>
-                  <label
-                    htmlFor="phone"
-                    className="block text-sm font-medium mb-2 text-text-secondary"
-                  >
-                    Телефон или Telegram
-                  </label>
-                  <input
-                    id="phone"
-                    type="tel"
-                    required
-                    value={formData.phone}
-                    onChange={(e) =>
-                      setFormData({ ...formData, phone: e.target.value })
-                    }
-                    placeholder="+7 (900) 123-45-67"
-                    className="w-full px-5 py-3.5 rounded-xl bg-surface-elevated border border-surface-border text-white placeholder:text-text-muted focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all duration-200"
-                  />
-                </div>
-
-                {/* Course Select */}
-                <div>
-                  <label className="block text-sm font-medium mb-3 text-text-secondary">
-                    Какой курс интересует?
-                  </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setFormData({ ...formData, course: "beginner" })
-                      }
-                      className={`p-4 rounded-xl border text-left transition-all duration-200 ${
-                        formData.course === "beginner"
-                          ? "border-accent/50 bg-accent/10"
-                          : "border-surface-border bg-surface-elevated hover:border-surface-border/80"
-                      }`}
+              <>
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  {/* Name */}
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium mb-2 text-text-secondary"
                     >
-                      <div className="text-sm font-semibold mb-1">
-                        🚀 Топ-мастер за 7 дней
-                      </div>
-                      <div className="text-xs text-text-muted">
-                        Для новичков · 45 000 ₽
-                      </div>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setFormData({ ...formData, course: "advanced" })
+                      Ваше имя
+                    </label>
+                    <input
+                      id="name"
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={(e) =>
+                        setFormData({ ...formData, name: e.target.value })
                       }
-                      className={`p-4 rounded-xl border text-left transition-all duration-200 ${
-                        formData.course === "advanced"
-                          ? "border-accent/50 bg-accent/10"
-                          : "border-surface-border bg-surface-elevated hover:border-surface-border/80"
-                      }`}
+                      placeholder="Как вас зовут?"
+                      className="w-full px-5 py-3.5 rounded-xl bg-surface-elevated border border-surface-border text-white placeholder:text-text-muted focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all duration-200"
+                    />
+                  </div>
+
+                  {/* Phone */}
+                  <div>
+                    <label
+                      htmlFor="phone"
+                      className="block text-sm font-medium mb-2 text-text-secondary"
                     >
-                      <div className="text-sm font-semibold mb-1">
-                        ⚡ Повышение квалификации
-                      </div>
-                      <div className="text-xs text-text-muted">
-                        Для мастеров · 10 000 ₽
-                      </div>
-                    </button>
+                      Телефон или Telegram
+                    </label>
+                    <input
+                      id="phone"
+                      type="tel"
+                      required
+                      value={formData.phone}
+                      onChange={(e) =>
+                        setFormData({ ...formData, phone: e.target.value })
+                      }
+                      placeholder="+7"
+                      className="w-full px-5 py-3.5 rounded-xl bg-surface-elevated border border-surface-border text-white placeholder:text-text-muted focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all duration-200"
+                    />
+                  </div>
+
+                  {/* Course Select */}
+                  <div>
+                    <label className="block text-sm font-medium mb-3 text-text-secondary">
+                      Какой курс интересует?
+                    </label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setFormData({ ...formData, course: "beginner" })
+                        }
+                        className={`p-4 rounded-xl border text-left transition-all duration-200 ${
+                          formData.course === "beginner"
+                            ? "border-accent/50 bg-accent/10"
+                            : "border-surface-border bg-surface-elevated hover:border-surface-border/80"
+                        }`}
+                      >
+                        <div className="text-sm font-semibold mb-1">
+                          🚀 Топ-мастер за 7 дней
+                        </div>
+                        <div className="text-xs text-text-muted">
+                          Для новичков · 45 000 ₽
+                        </div>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setFormData({ ...formData, course: "advanced" })
+                        }
+                        className={`p-4 rounded-xl border text-left transition-all duration-200 ${
+                          formData.course === "advanced"
+                            ? "border-accent/50 bg-accent/10"
+                            : "border-surface-border bg-surface-elevated hover:border-surface-border/80"
+                        }`}
+                      >
+                        <div className="text-sm font-semibold mb-1">
+                          ⚡ Повышение квалификации
+                        </div>
+                        <div className="text-xs text-text-muted">
+                          Для мастеров · 10 000 ₽
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Submit */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="btn-primary w-full text-base sm:text-lg py-5 flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        Отправляю...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-5 h-5" />
+                        Занять место в группе
+                      </>
+                    )}
+                  </button>
+
+                  <p className="text-center text-text-muted text-xs">
+                    Нажимая кнопку, вы соглашаетесь на обработку персональных
+                    данных
+                  </p>
+                </form>
+
+                {/* Alternative CTA */}
+                <div className="mt-6 pt-6 border-t border-surface-border/30">
+                  <p className="text-center text-text-muted text-sm mb-4">
+                    Или напишите напрямую:
+                  </p>
+                  <div className="flex gap-3">
+                    <a
+                      href="https://wa.me/79001234567"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-green-600/10 border border-green-600/20 text-green-400 text-sm font-medium hover:bg-green-600/20 transition-all"
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                      WhatsApp
+                    </a>
+                    <a
+                      href="https://t.me/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium hover:bg-blue-500/20 transition-all"
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                      Telegram
+                    </a>
                   </div>
                 </div>
-
-                {/* Message */}
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-medium mb-2 text-text-secondary"
-                  >
-                    Вопросы или пожелания{" "}
-                    <span className="text-text-muted">(необязательно)</span>
-                  </label>
-                  <textarea
-                    id="message"
-                    rows={3}
-                    value={formData.message}
-                    onChange={(e) =>
-                      setFormData({ ...formData, message: e.target.value })
-                    }
-                    placeholder="Например: есть ли рассрочка? Какие ближайшие даты?"
-                    className="w-full px-5 py-3.5 rounded-xl bg-surface-elevated border border-surface-border text-white placeholder:text-text-muted focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all duration-200 resize-none"
-                  />
-                </div>
-
-                {/* Submit */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="btn-primary w-full text-lg py-5 flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                      Отправляю...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-5 h-5" />
-                      Занять место в группе
-                    </>
-                  )}
-                </button>
-
-                <p className="text-center text-text-muted text-xs">
-                  Нажимая кнопку, вы соглашаетесь на обработку персональных
-                  данных
-                </p>
-              </form>
+              </>
             )}
           </motion.div>
 
@@ -257,29 +264,12 @@ export default function CTAForm() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-6 text-text-muted text-sm"
+            className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-text-muted text-sm"
           >
-            <a
-              href="#"
-              className="flex items-center gap-2 hover:text-accent transition-colors"
-            >
+            <span className="flex items-center gap-2">
               <MapPin className="w-4 h-4" />
               Москва, Березовая аллея, 7Б
-            </a>
-            <a
-              href="tel:+79001234567"
-              className="flex items-center gap-2 hover:text-accent transition-colors"
-            >
-              <Phone className="w-4 h-4" />
-              +7 (900) 123-45-67
-            </a>
-            <a
-              href="https://t.me/"
-              className="flex items-center gap-2 hover:text-accent transition-colors"
-            >
-              <MessageCircle className="w-4 h-4" />
-              Telegram
-            </a>
+            </span>
           </motion.div>
         </div>
       </div>
