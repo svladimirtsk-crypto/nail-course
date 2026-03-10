@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X, Sparkles, Phone } from "lucide-react";
 
 const navLinks = [
   { href: "#for-whom", label: "Для кого" },
@@ -43,6 +43,7 @@ export default function Navigation() {
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 sm:h-20">
+            {/* Logo */}
             <a href="#" className="flex items-center gap-2 group">
               <div className="w-8 h-8 rounded-lg bg-gradient-accent flex items-center justify-center group-hover:shadow-[0_0_20px_rgba(255,45,123,0.5)] transition-shadow duration-300">
                 <Sparkles className="w-4 h-4 text-white" />
@@ -52,6 +53,7 @@ export default function Navigation() {
               </span>
             </a>
 
+            {/* Desktop Links */}
             <div className="hidden md:flex items-center gap-1">
               {navLinks.map((link) => (
                 <a
@@ -64,13 +66,25 @@ export default function Navigation() {
               ))}
             </div>
 
-            <a
-              href="#enroll"
-              className="hidden md:block text-sm font-semibold px-5 py-2.5 rounded-xl bg-gradient-accent text-white hover:shadow-[0_0_30px_rgba(255,45,123,0.3)] transition-all duration-300"
-            >
-              Занять место
-            </a>
+            {/* Desktop CTA group */}
+            <div className="hidden md:flex items-center gap-3">
+              <a
+                href="tel:+79999777655"
+                className="flex items-center gap-1.5 px-3 py-2.5 rounded-xl text-sm text-text-secondary hover:text-white hover:bg-surface-elevated/50 transition-all duration-200"
+                aria-label="Позвонить"
+              >
+                <Phone className="w-4 h-4" />
+                <span className="hidden lg:inline">+7 999 977-76-55</span>
+              </a>
+              <a
+                href="#enroll"
+                className="text-sm font-semibold px-5 py-2.5 rounded-xl bg-gradient-accent text-white hover:shadow-[0_0_30px_rgba(255,45,123,0.3)] transition-all duration-300"
+              >
+                Занять место
+              </a>
+            </div>
 
+            {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMobileOpen(!isMobileOpen)}
               className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-surface-elevated/50 border border-surface-border/50"
@@ -86,6 +100,7 @@ export default function Navigation() {
         </div>
       </motion.nav>
 
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileOpen && (
           <motion.div
@@ -114,12 +129,25 @@ export default function Navigation() {
                   {link.label}
                 </motion.a>
               ))}
+
+              {/* Phone link in mobile menu */}
+              <motion.a
+                href="tel:+79999777655"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.42 }}
+                className="flex items-center gap-2 text-lg text-accent"
+              >
+                <Phone className="w-5 h-5" />
+                +7 999 977-76-55
+              </motion.a>
+
               <motion.a
                 href="#enroll"
                 onClick={() => setIsMobileOpen(false)}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.45 }}
+                transition={{ delay: 0.48 }}
                 className="mt-4 btn-primary text-lg px-10 py-4"
               >
                 Занять место
