@@ -29,8 +29,8 @@ const config: Config = {
       },
       fontFamily: {
         sans: [
-          "SF Pro Display",
           "Inter",
+          "SF Pro Display",
           "-apple-system",
           "BlinkMacSystemFont",
           "sans-serif",
@@ -41,15 +41,13 @@ const config: Config = {
           "radial-gradient(ellipse at center, var(--tw-gradient-stops))",
         "gradient-accent":
           "linear-gradient(135deg, #FF2D7B 0%, #FF6B9D 50%, #D91A63 100%)",
-        "gradient-card":
-          "linear-gradient(180deg, #1A1A1F 0%, #131316 100%)",
+        "gradient-card": "linear-gradient(180deg, #1A1A1F 0%, #131316 100%)",
         "gradient-hero":
           "radial-gradient(ellipse at 50% 0%, rgba(255,45,123,0.15) 0%, transparent 60%)",
       },
       animation: {
         "pulse-glow": "pulse-glow 3s ease-in-out infinite",
-        "float": "float 6s ease-in-out infinite",
-        "shimmer": "shimmer 2s linear infinite",
+        float: "float 6s ease-in-out infinite",
       },
       keyframes: {
         "pulse-glow": {
@@ -59,10 +57,6 @@ const config: Config = {
         float: {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
-        },
-        shimmer: {
-          "0%": { transform: "translateX(-100%)" },
-          "100%": { transform: "translateX(100%)" },
         },
       },
     },
