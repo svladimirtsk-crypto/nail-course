@@ -16,9 +16,9 @@ export const metadata: Metadata = {
     locale: "ru_RU",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=1200&h=630&fit=crop",
-        width: 1200,
-        height: 630,
+        url: "/gallery-1.jpg",
+        width: 800,
+        height: 800,
       },
     ],
   },
