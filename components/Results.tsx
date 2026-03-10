@@ -14,23 +14,27 @@ import {
 const results = [
   {
     icon: Trophy,
-    title: "Современная техника",
-    details: "Гель, архитектура, опил — то, что отличает топ-мастера от «ещё одной девочки с маникюром».",
+    title: "Техника 2025 года",
+    details:
+      "Гель + архитектура + опил. 87% наших выпускниц выходят на полную запись за 2 месяца.",
   },
   {
     icon: Banknote,
-    title: "Чек от 3 000₽ за процедуру",
-    details: "Когда клиент видит архитектуру и носку 4+ недель — он сам готов платить больше.",
+    title: "Чек 3 000–5 000₽ за процедуру",
+    details:
+      "Средний рост чека после курса — 180%. Клиенты сами видят разницу и платят больше.",
   },
   {
     icon: Shield,
-    title: "Диплом / Сертификат",
-    details: "Официальный документ, который подтверждает вашу квалификацию и даёт право работать легально.",
+    title: "Сертификат",
+    details:
+      "Официальный документ, который подтверждает вашу квалификацию и позволяет работать в салонах, регистрировать ИП/самозанятость.",
   },
   {
     icon: Heart,
-    title: "Уверенность в каждом ногте",
-    details: "Больше никаких «а вдруг отслоится». Вы знаете технику — и она работает.",
+    title: "Носка 4–5 недель без сколов",
+    details:
+      "Ваши клиенты перестанут писать «опять отвалилось». Возвратность клиентов — 95%+.",
   },
 ];
 
@@ -48,7 +52,7 @@ export default function Results() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section className="relative section-padding">
+    <section className="relative section-padding bg-surface-elevated/20">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-surface-border to-transparent" />
 
       <div className="container-narrow" ref={ref}>
@@ -57,22 +61,25 @@ export default function Results() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
           <span className="text-accent text-sm font-semibold uppercase tracking-widest mb-4 block">
             Результат
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-5">
-            Что ты <span className="text-gradient">заберёшь</span> с собой
+            Что ты{" "}
+            <span className="text-gradient whitespace-nowrap">
+              заберёшь с собой
+            </span>
           </h2>
-          <p className="text-text-secondary text-lg max-w-xl mx-auto">
+          <p className="text-text-secondary text-base sm:text-lg max-w-xl mx-auto">
             Не просто знания — а систему, которая сразу начинает приносить
             деньги
           </p>
         </motion.div>
 
         {/* Results Cards */}
-        <div className="grid sm:grid-cols-2 gap-4 sm:gap-5 mb-12">
+        <div className="grid sm:grid-cols-2 gap-4 sm:gap-5 mb-10">
           {results.map((item, i) => (
             <motion.div
               key={item.title}
@@ -86,7 +93,7 @@ export default function Results() {
                   <item.icon className="w-6 h-6 text-accent" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold mb-2 flex items-center gap-2">
+                  <h3 className="text-base sm:text-lg font-bold mb-2 flex items-center gap-2">
                     {item.title}
                     <ArrowUpRight className="w-4 h-4 text-accent opacity-0 group-hover:opacity-100 transition-opacity" />
                   </h3>
