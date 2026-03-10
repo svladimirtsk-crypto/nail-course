@@ -15,8 +15,8 @@
   }
 
   body {
-    font-family: "SF Pro Display", "Inter", -apple-system,
-      BlinkMacSystemFont, sans-serif;
+    font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont,
+      sans-serif;
     overflow-x: hidden;
   }
 
@@ -25,7 +25,6 @@
     color: #ffffff;
   }
 
-  /* Скроллбар */
   ::-webkit-scrollbar {
     width: 6px;
   }
@@ -46,38 +45,12 @@
     @apply bg-surface-card/80 backdrop-blur-xl border border-surface-border/50 rounded-2xl;
   }
 
-  .glow-border {
-    position: relative;
-  }
-  .glow-border::before {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 45, 123, 0.5),
-      transparent 50%,
-      rgba(255, 45, 123, 0.2)
-    );
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-  .glow-border:hover::before {
-    opacity: 1;
-  }
-
   .text-gradient {
     @apply bg-gradient-accent bg-clip-text text-transparent;
   }
 
   .btn-primary {
-    @apply relative overflow-hidden bg-gradient-accent text-white 
-           font-semibold px-8 py-4 rounded-xl
-           transition-all duration-300 
-           hover:shadow-[0_0_40px_rgba(255,45,123,0.4)] 
-           hover:scale-[1.02] active:scale-[0.98];
+    @apply relative overflow-hidden bg-gradient-accent text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,45,123,0.4)] hover:scale-[1.02] active:scale-[0.98];
   }
 
   .btn-primary::after {
@@ -104,11 +77,12 @@
   .container-narrow {
     @apply max-w-6xl mx-auto;
   }
-}
 
-@layer utilities {
-  .mask-fade-b {
-    mask-image: linear-gradient(to bottom, black 70%, transparent);
-    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent);
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
