@@ -4,155 +4,99 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sparkles, Phone } from "lucide-react";
 
-const navLinks = [
-  { href: "#for-whom", label: "Для кого" },
+const links = [
+  { href: "#method", label: "Метод" },
+  { href: "#courses", label: "Программа" },
   { href: "#author", label: "Автор" },
-  { href: "#program", label: "Программа" },
-  { href: "#pricing", label: "Тарифы" },
-  { href: "#enroll", label: "Записаться" },
+  { href: "#pricing", label: "Форматы" },
 ];
 
 export default function Navigation() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const fn = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", fn, { passive: true });
+    return () => window.removeEventListener("scroll", fn);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = isMobileOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isMobileOpen]);
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -100 }}
+      <motion.header
+        initial={{ y: -80 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled
-            ? "bg-surface/80 backdrop-blur-2xl border-b border-surface-border/30 shadow-2xl shadow-black/20"
-            : "bg-transparent"
+        transition={{ duration: 0.5 }}
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-400 ${
+          scrolled ? "bg-[#08080a]/80 backdrop-blur-2xl border-b border-white/[0.04]" : ""
         }`}
       >
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 sm:h-20">
-            {/* Logo */}
-            <a href="#" className="flex items-center gap-2 group">
-              <div className="w-8 h-8 rounded-lg bg-gradient-accent flex items-center justify-center group-hover:shadow-[0_0_20px_rgba(255,45,123,0.5)] transition-shadow duration-300">
-                <Sparkles className="w-4 h-4 text-white" />
-              </div>
-              <span className="font-bold text-lg tracking-tight">
-                ELENA<span className="text-accent">.</span>NAIL
-              </span>
+        <div className="wrap section-x flex items-center justify-between h-14 sm:h-16">
+          <a href="#" className="flex items-center gap-2 group">
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#FF2D7B] to-[#d91a63] flex items-center justify-center">
+              <Sparkles className="w-3.5 h-3.5 text-white" />
+            </div>
+            <span className="font-bold text-sm tracking-tight text-white/90">
+              ELENA<span className="text-[#FF2D7B]">.</span>GEL
+            </span>
+          </a>
+
+          <nav className="hidden md:flex items-center gap-1">
+            {links.map((l) => (
+              <a key={l.href} href={l.href}
+                className="px-3 py-1.5 text-[13px] text-white/50 hover:text-white rounded-lg transition-colors">
+                {l.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="hidden md:flex items-center gap-2">
+            <a href="tel:+79999777655"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-[13px] text-white/40 hover:text-white transition-colors">
+              <Phone className="w-3.5 h-3.5" />
+              <span className="hidden lg:inline">+7 999 977-76-55</span>
             </a>
-
-            {/* Desktop Links */}
-            <div className="hidden md:flex items-center gap-1">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="px-4 py-2 text-sm text-text-secondary hover:text-white rounded-lg hover:bg-surface-elevated/50 transition-all duration-200"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-
-            {/* Desktop CTA group */}
-            <div className="hidden md:flex items-center gap-3">
-              <a
-                href="tel:+79999777655"
-                className="flex items-center gap-1.5 px-3 py-2.5 rounded-xl text-sm text-text-secondary hover:text-white hover:bg-surface-elevated/50 transition-all duration-200"
-                aria-label="Позвонить"
-              >
-                <Phone className="w-4 h-4" />
-                <span className="hidden lg:inline">+7 999 977-76-55</span>
-              </a>
-              <a
-                href="#enroll"
-                className="text-sm font-semibold px-5 py-2.5 rounded-xl bg-gradient-accent text-white hover:shadow-[0_0_30px_rgba(255,45,123,0.3)] transition-all duration-300"
-              >
-                Занять место
-              </a>
-            </div>
-
-            {/* Mobile Menu Toggle */}
-            <button
-              onClick={() => setIsMobileOpen(!isMobileOpen)}
-              className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-surface-elevated/50 border border-surface-border/50"
-              aria-label="Меню"
-            >
-              {isMobileOpen ? (
-                <X className="w-5 h-5" />
-              ) : (
-                <Menu className="w-5 h-5" />
-              )}
-            </button>
+            <a href="#enroll"
+              className="btn-primary text-[13px] px-4 py-2 text-white">
+              Записаться
+            </a>
           </div>
+
+          <button onClick={() => setOpen(!open)}
+            className="md:hidden w-9 h-9 flex items-center justify-center rounded-xl bg-white/[0.05] border border-white/[0.06]"
+            aria-label="Меню">
+            {open ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+          </button>
         </div>
-      </motion.nav>
+      </motion.header>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
-        {isMobileOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-surface/95 backdrop-blur-2xl md:hidden"
-          >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ delay: 0.1 }}
-              className="flex flex-col items-center justify-center h-full gap-6"
-            >
-              {navLinks.map((link, i) => (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsMobileOpen(false)}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.15 + i * 0.05 }}
-                  className="text-2xl font-semibold text-text-secondary hover:text-white transition-colors"
-                >
-                  {link.label}
-                </motion.a>
-              ))}
-
-              {/* Phone link in mobile menu */}
-              <motion.a
-                href="tel:+79999777655"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.42 }}
-                className="flex items-center gap-2 text-lg text-accent"
-              >
-                <Phone className="w-5 h-5" />
-                +7 999 977-76-55
+        {open && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-40 bg-[#08080a]/97 backdrop-blur-2xl md:hidden flex flex-col items-center justify-center gap-5">
+            {links.map((l, i) => (
+              <motion.a key={l.href} href={l.href} onClick={() => setOpen(false)}
+                initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + i * 0.04 }}
+                className="text-xl font-semibold text-white/60 hover:text-white">
+                {l.label}
               </motion.a>
-
-              <motion.a
-                href="#enroll"
-                onClick={() => setIsMobileOpen(false)}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.48 }}
-                className="mt-4 btn-primary text-lg px-10 py-4"
-              >
-                Занять место
-              </motion.a>
-            </motion.div>
+            ))}
+            <motion.a href="tel:+79999777655" initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="flex items-center gap-2 text-[#FF2D7B] mt-2">
+              <Phone className="w-4 h-4" /> +7 999 977-76-55
+            </motion.a>
+            <motion.a href="#enroll" onClick={() => setOpen(false)}
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }}
+              className="btn-primary text-white px-8 py-3 mt-2">
+              Записаться
+            </motion.a>
           </motion.div>
         )}
       </AnimatePresence>
