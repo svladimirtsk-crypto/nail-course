@@ -2,100 +2,112 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { AnimatePresence } from "framer-motion";
 
 const images = [
-  { src: "/gallery-1.jpg", alt: "Идеальный гель-маникюр", label: "Результат" },
-  { src: "/gallery-2.jpg", alt: "Процесс работы с гелем", label: "Процесс" },
-  { src: "/gallery-3.jpg", alt: "Работа ученицы", label: "Ученица" },
-  { src: "/gallery-4.jpg", alt: "На занятии курса", label: "На занятии" },
-  { src: "/gallery-5.jpg", alt: "Студия и материалы", label: "Студия" },
-  { src: "/gallery-6.jpg", alt: "Дизайн ногтей", label: "Дизайн" },
+  { src: "/gallery-1.jpg", alt: "Результат — гель" },
+  { src: "/gallery-2.jpg", alt: "Процесс работы" },
+  { src: "/gallery-3.jpg", alt: "Архитектура" },
+  { src: "/gallery-4.jpg", alt: "На занятии" },
+  { src: "/gallery-5.jpg", alt: "Студия" },
+  { src: "/gallery-6.jpg", alt: "Дизайн" },
 ];
 
 export default function Gallery() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [lightbox, setLightbox] = useState<number | null>(null);
 
-  const scroll = (direction: "left" | "right") => {
+  const scroll = (dir: "l" | "r") => {
     if (!scrollRef.current) return;
-    const scrollAmount = scrollRef.current.clientWidth * 0.6;
     scrollRef.current.scrollBy({
-      left: direction === "left" ? -scrollAmount : scrollAmount,
+      left: dir === "l" ? -280 : 280,
       behavior: "smooth",
     });
   };
 
   return (
-    <section className="relative py-16 sm:py-20 overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-surface-border to-transparent" />
-
-      <div className="container-narrow mb-10 px-5">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="flex items-end justify-between"
-        >
+    <>
+      <section className="section-y overflow-hidden">
+        <div className="wrap section-x mb-6 flex items-end justify-between">
           <div>
-            <span className="text-accent text-sm font-semibold uppercase tracking-widest mb-4 block">
-              Реальные результаты
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-black">
-              Работы учениц,{" "}
-              <span className="text-gradient">не стоковые фото</span>
+            <p className="label mb-2">Уровень работ</p>
+            <h2 className="text-xl sm:text-2xl font-black tracking-tight">
+              Реальные результаты техники
             </h2>
           </div>
-
-          {/* Desktop scroll buttons */}
-          <div className="hidden md:flex items-center gap-2">
-            <button
-              onClick={() => scroll("left")}
-              className="w-10 h-10 rounded-xl bg-surface-card border border-surface-border flex items-center justify-center hover:border-accent/50 hover:bg-accent/5 transition-all"
-              aria-label="Предыдущие фото"
-            >
-              <ChevronLeft className="w-5 h-5 text-text-secondary" />
+          <div className="hidden sm:flex gap-2">
+            <button onClick={() => scroll("l")} aria-label="Назад"
+              className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center hover:border-white/[0.12] transition-colors">
+              <ChevronLeft className="w-4 h-4 text-white/40" />
             </button>
-            <button
-              onClick={() => scroll("right")}
-              className="w-10 h-10 rounded-xl bg-surface-card border border-surface-border flex items-center justify-center hover:border-accent/50 hover:bg-accent/5 transition-all"
-              aria-label="Следующие фото"
-            >
-              <ChevronRight className="w-5 h-5 text-text-secondary" />
+            <button onClick={() => scroll("r")} aria-label="Вперёд"
+              className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center hover:border-white/[0.12] transition-colors">
+              <ChevronRight className="w-4 h-4 text-white/40" />
             </button>
           </div>
-        </motion.div>
-      </div>
+        </div>
 
-      {/* Scrollable gallery */}
-      <div
-        ref={scrollRef}
-        className="flex overflow-x-auto snap-x snap-mandatory gap-4 px-5 scrollbar-hide pb-4 cursor-grab active:cursor-grabbing"
-      >
-        {images.map((img, i) => (
-          <motion.div
-            key={img.alt}
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.08 }}
-            className="snap-center shrink-0 w-[70vw] sm:w-[45vw] md:w-[30vw] lg:w-[22vw] aspect-square rounded-2xl overflow-hidden relative group"
-          >
-            <Image
-              src={img.src}
-              alt={img.alt}
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500"
-              sizes="(max-width: 640px) 70vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 22vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-              <span className="text-sm font-medium">{img.label}</span>
+        <div ref={scrollRef}
+          className="flex gap-3 overflow-x-auto scrollbar-hide px-5 sm:px-6 lg:px-8 pb-2 cursor-grab active:cursor-grabbing">
+          {images.map((img, i) => (
+            <motion.button key={img.src}
+              initial={{ opacity: 0, scale: 0.96 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.06 }}
+              onClick={() => setLightbox(i)}
+              className="shrink-0 w-[60vw] sm:w-[38vw] md:w-[28vw] lg:w-[22vw] aspect-[4/5] rounded-2xl overflow-hidden relative group">
+              <Image src={img.src} alt={img.alt} fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                sizes="(max-width:640px) 60vw,(max-width:1024px) 38vw, 22vw" />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
+            </motion.button>
+          ))}
+        </div>
+      </section>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightbox !== null && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-xl flex items-center justify-center p-5"
+            onClick={() => setLightbox(null)}>
+            <button className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center"
+              aria-label="Закрыть">
+              <X className="w-5 h-5 text-white" />
+            </button>
+
+            <button onClick={(e) => { e.stopPropagation(); setLightbox(lightbox > 0 ? lightbox - 1 : images.length - 1); }}
+              className="absolute left-3 sm:left-6 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center"
+              aria-label="Предыдущее">
+              <ChevronLeft className="w-5 h-5 text-white" />
+            </button>
+
+            <motion.div key={lightbox} initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}
+              className="relative w-full max-w-2xl aspect-[4/5] rounded-2xl overflow-hidden"
+              onClick={(e) => e.stopPropagation()}>
+              <Image src={images[lightbox].src} alt={images[lightbox].alt}
+                fill className="object-cover" sizes="90vw" />
+            </motion.div>
+
+            <button onClick={(e) => { e.stopPropagation(); setLightbox(lightbox < images.length - 1 ? lightbox + 1 : 0); }}
+              className="absolute right-3 sm:right-6 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center"
+              aria-label="Следующее">
+              <ChevronRight className="w-5 h-5 text-white" />
+            </button>
+
+            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-1.5">
+              {images.map((_, i) => (
+                <div key={i} className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                  i === lightbox ? "bg-white" : "bg-white/20"}`} />
+              ))}
             </div>
           </motion.div>
-        ))}
-      </div>
-    </section>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
