@@ -9,7 +9,7 @@ export default function Hero() {
     <section className="relative overflow-hidden">
       {/* BG */}
       <div className="absolute inset-0">
-        <Image src="/hero-bg.jpg" alt="" fill priority className="object-cover opacity-20" sizes="100vw" />
+        <Image src="/hero-bg.jpg" alt="" fill priority className="object-cover opacity-50" sizes="100vw" />
         <div className="absolute inset-0 bg-gradient-to-t from-[rgb(var(--bg))] via-[rgb(var(--bg))]/75 to-[rgb(var(--bg))]/40" />
       </div>
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[380px] h-[380px] rounded-full blur-[100px]" style={{ background: "rgb(var(--accent) / 0.06)" }} />
