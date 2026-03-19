@@ -4,6 +4,7 @@ import Audience from "@/components/Audience";
 import Technique from "@/components/Technique";
 import Program from "@/components/Program";
 import Gallery from "@/components/Gallery";
+import Benefits from "@/components/Benefits";
 import Author from "@/components/Author";
 import PricingFAQ from "@/components/PricingFAQ";
 import Enroll from "@/components/Enroll";
@@ -19,6 +20,7 @@ export default function Home() {
       <Technique />
       <Program />
       <Gallery />
+      <Benefits />
       <Author />
       <PricingFAQ />
       <Enroll />
