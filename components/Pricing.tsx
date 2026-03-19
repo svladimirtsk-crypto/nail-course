@@ -3,227 +3,130 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import {
-  Rocket,
-  Zap,
-  ArrowRight,
-  Crown,
-  Clock,
-  Users,
-  BookOpen,
-  Wrench,
-  FileCheck,
-  MessageCircle,
-  Target,
-  Layers,
-  Scissors,
-  BarChart3,
-  ShieldCheck,
-  Package,
-  Phone,
+  Rocket, Zap, ArrowRight, Clock, Users, Package, FileCheck,
+  MessageCircle, Phone, Crown,
 } from "lucide-react";
 
 const plans = [
   {
-    id: "beginner",
+    id: "full",
     icon: Rocket,
-    badge: "ХИТОВЫЙ ВЫБОР",
-    name: "Топ-мастер за 7 дней",
-    tagline: "С нуля до первых клиентов",
+    popular: true,
+    name: "С нуля — полный курс",
+    tag: "7 дней · до 3 человек",
     price: "45 000",
-    period: "за курс",
-    perDay: "≈ 6 400₽/день обучения",
-    description:
-      "Полный интенсив для тех, кто начинает с абсолютного нуля. За 7 дней — от «никогда не держала аппарат» до «могу работать с клиентами».",
+    note: "≈ 6 400 ₽ / день",
+    desc: "Полный путь от нуля до уверенной работы с гелем, верхними формами и опилом. Для тех, кто входит в профессию на сильной базе.",
     features: [
-      { icon: Clock, text: "7 дней, с 10:00 до 16:00" },
-      { icon: Users, text: "Мини-группа до 3 человек" },
-      { icon: BookOpen, text: "Теория + практика каждый день" },
-      { icon: Wrench, text: "Аппаратный маникюр с нуля" },
-      { icon: Layers, text: "Гель, архитектура, выкладка" },
-      { icon: Scissors, text: "Техника опила и свободный край" },
-      { icon: Target, text: "Работа на моделях с 3-го дня" },
-      { icon: Package, text: "Все материалы включены" },
-      { icon: FileCheck, text: "Сертификат по окончании" },
-      { icon: MessageCircle, text: "Чат поддержки после выпуска" },
+      { icon: Clock, t: "7 дней, 10:00–16:00" },
+      { icon: Users, t: "Мини-группа до 3 человек" },
+      { icon: Package, t: "Материалы включены" },
+      { icon: FileCheck, t: "Сертификат" },
+      { icon: MessageCircle, t: "Поддержка после курса" },
     ],
-    accent: true,
   },
   {
-    id: "advanced",
+    id: "pro",
     icon: Zap,
-    badge: null,
+    popular: false,
     name: "Повышение квалификации",
-    tagline: "Для действующих мастеров",
+    tag: "1 день · индивидуально",
     price: "10 000",
-    period: "за курс",
-    perDay: "Окупается за 3-4 процедуры",
-    description:
-      "Ты уже работаешь, но хочешь перейти на гель и увеличить чек. Индивидуальный формат — разберём именно твои ошибки.",
+    note: "окупается за 3–4 процедуры",
+    desc: "Переход с гель-лака на гель и верхние формы. Разбор ваших работ, постановка техники за 1 интенсивный день.",
     features: [
-      { icon: Clock, text: "1 день интенсива" },
-      { icon: Users, text: "Индивидуально / до 2 человек" },
-      { icon: Layers, text: "Архитектура и выкладка геля" },
-      { icon: Scissors, text: "Опил свободного края изнутри" },
-      { icon: ShieldCheck, text: "Работа с проблемными ногтями" },
-      { icon: BarChart3, text: "Разбор ваших работ по фото" },
-      { icon: Target, text: "Практика на моделях" },
-      { icon: Package, text: "Все материалы включены" },
-      { icon: FileCheck, text: "Сертификат повышения квалификации" },
-      { icon: MessageCircle, text: "Поддержка после курса" },
+      { icon: Clock, t: "1 день интенсива" },
+      { icon: Users, t: "До 2 человек" },
+      { icon: Package, t: "Материалы включены" },
+      { icon: FileCheck, t: "Сертификат" },
+      { icon: MessageCircle, t: "Поддержка после курса" },
     ],
-    accent: false,
   },
 ];
 
 export default function Pricing() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section id="pricing" className="relative section-padding">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-surface-border to-transparent" />
-      <div className="absolute right-1/4 top-1/3 w-[400px] h-[400px] bg-accent/5 rounded-full blur-[120px]" />
-
-      <div className="container-narrow relative" ref={ref}>
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-14"
-        >
-          <span className="text-accent text-sm font-semibold uppercase tracking-widest mb-4 block">
-            Тарифы
-          </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-5">
-            Инвестиция, которая
-            <br />
-            <span className="text-gradient">окупается за неделю</span>
+    <section id="pricing" className="section-y section-x" ref={ref}>
+      <div className="wrap">
+        <motion.div initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }}
+          className="mb-10">
+          <p className="label mb-3">Форматы и стоимость</p>
+          <h2 className="text-2xl sm:text-3xl font-black tracking-tight">
+            Выберите свой <span className="text-gradient">формат</span>
           </h2>
-          <p className="text-text-secondary text-base sm:text-lg max-w-xl mx-auto">
-            Средний мастер в Москве зарабатывает 150 000–300 000 ₽/мес.
-            Посчитайте сами.
-          </p>
         </motion.div>
 
-        {/* Cards */}
-        <div className="grid md:grid-cols-2 gap-5 sm:gap-6 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-4">
           {plans.map((plan, i) => (
-            <motion.div
-              key={plan.id}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 + i * 0.15 }}
-              className={`relative rounded-3xl overflow-hidden ${
-                plan.accent
-                  ? "border-2 border-accent/40 shadow-[0_0_60px_rgba(255,45,123,0.1)]"
-                  : "border border-surface-border"
-              }`}
-            >
-              {plan.badge && (
-                <div className="bg-gradient-accent text-white text-xs font-bold text-center py-2 tracking-wider">
-                  <Crown className="w-3.5 h-3.5 inline mr-1.5 -mt-0.5" />
-                  {plan.badge}
+            <motion.div key={plan.id}
+              initial={{ opacity: 0, y: 28 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.15 + i * 0.1 }}
+              className={`rounded-2xl overflow-hidden ${
+                plan.popular
+                  ? "border-2 border-[#FF2D7B]/30 shadow-[0_0_50px_rgba(255,45,123,0.08)]"
+                  : "border border-white/[0.06]"
+              }`}>
+
+              {plan.popular && (
+                <div className="bg-[#FF2D7B] text-white text-[11px] font-bold text-center py-1.5 tracking-wider flex items-center justify-center gap-1.5">
+                  <Crown className="w-3 h-3" /> РЕКОМЕНДУЕМ
                 </div>
               )}
 
-              <div
-                className={`p-6 sm:p-8 ${
-                  plan.accent ? "bg-accent/[0.04]" : "bg-surface-card"
-                }`}
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <div
-                    className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-                      plan.accent ? "bg-accent/15" : "bg-surface-elevated"
-                    }`}
-                  >
-                    <plan.icon
-                      className={`w-5 h-5 ${
-                        plan.accent ? "text-accent" : "text-text-secondary"
-                      }`}
-                    />
+              <div className={`p-5 sm:p-7 ${plan.popular ? "bg-[#FF2D7B]/[0.03]" : "bg-white/[0.02]"}`}>
+                <div className="flex items-center gap-2.5 mb-4">
+                  <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${
+                    plan.popular ? "bg-[#FF2D7B]/[0.12]" : "bg-white/[0.05]"}`}>
+                    <plan.icon className={`w-4.5 h-4.5 ${plan.popular ? "text-[#FF2D7B]" : "text-white/40"}`} />
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg">{plan.name}</h3>
-                    <p className="text-text-muted text-xs">{plan.tagline}</p>
+                    <h3 className="text-sm font-bold">{plan.name}</h3>
+                    <p className="text-[11px] text-white/30">{plan.tag}</p>
                   </div>
                 </div>
 
-                <div className="mb-5">
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-4xl sm:text-5xl font-black">
-                      {plan.price}
-                    </span>
-                    <span className="text-lg text-text-muted">₽</span>
-                  </div>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className="text-sm text-text-muted">
-                      {plan.period}
-                    </span>
-                    <span className="text-xs text-text-muted bg-surface-elevated px-2 py-0.5 rounded">
-                      {plan.perDay}
-                    </span>
-                  </div>
+                <div className="mb-4">
+                  <span className="text-3xl sm:text-4xl font-black">{plan.price}</span>
+                  <span className="text-sm text-white/30 ml-1">₽</span>
+                  <span className="block text-[11px] text-white/25 mt-0.5">{plan.note}</span>
                 </div>
 
-                <p className="text-text-secondary text-sm leading-relaxed mb-6 pb-6 border-b border-surface-border/50">
-                  {plan.description}
+                <p className="text-xs text-white/40 leading-relaxed mb-5 pb-5 border-b border-white/[0.05]">
+                  {plan.desc}
                 </p>
 
-                <div className="space-y-3 mb-8">
-                  {plan.features.map((feature) => (
-                    <div
-                      key={feature.text}
-                      className="flex items-center gap-3"
-                    >
-                      <feature.icon
-                        className={`w-4 h-4 shrink-0 ${
-                          plan.accent ? "text-accent" : "text-text-muted"
-                        }`}
-                      />
-                      <span className="text-sm text-text-secondary">
-                        {feature.text}
-                      </span>
+                <div className="space-y-2.5 mb-6">
+                  {plan.features.map((f) => (
+                    <div key={f.t} className="flex items-center gap-2.5">
+                      <f.icon className={`w-3.5 h-3.5 shrink-0 ${plan.popular ? "text-[#FF2D7B]/60" : "text-white/20"}`} />
+                      <span className="text-xs text-white/45">{f.t}</span>
                     </div>
                   ))}
                 </div>
 
-                {/* CTA buttons */}
-                <div className="space-y-3">
-                  <a
-                    href="#enroll"
-                    className={`w-full flex items-center justify-center gap-2 py-4 rounded-xl font-semibold transition-all duration-300 ${
-                      plan.accent
-                        ? "btn-primary"
-                        : "bg-surface-elevated border border-surface-border text-white hover:border-accent/50 hover:bg-accent/5"
-                    }`}
-                  >
-                    Записаться
-                    <ArrowRight className="w-4 h-4" />
+                <div className="space-y-2">
+                  <a href="#enroll"
+                    className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold transition-all ${
+                      plan.popular
+                        ? "btn-primary text-white"
+                        : "bg-white/[0.05] border border-white/[0.08] text-white/80 hover:border-[#FF2D7B]/30"
+                    }`}>
+                    Записаться <ArrowRight className="w-3.5 h-3.5" />
                   </a>
-                  <a
-                    href="tel:+79999777655"
-                    className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm text-text-muted hover:text-white border border-surface-border/50 hover:border-accent/30 transition-all duration-300"
-                  >
-                    <Phone className="w-4 h-4" />
-                    Или позвоните: +7 999 977-76-55
+                  <a href="tel:+79999777655"
+                    className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-[11px] text-white/25 hover:text-white/50 transition-colors">
+                    <Phone className="w-3 h-3" /> позвонить
                   </a>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="text-center text-text-muted text-sm mt-8"
-        >
-          💳 Возможна рассрочка — обсудим индивидуально
-        </motion.p>
       </div>
     </section>
   );
