@@ -1,59 +1,35 @@
 "use client";
-
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
+import { AUTHOR } from "@/lib/content";
 
 export default function Author() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section id="author" className="section-y section-x bg-white/[0.01]" ref={ref}>
+    <section id="author" className="sy sx bg-white/[0.01]" ref={ref}>
       <div className="wrap">
-        <div className="grid lg:grid-cols-[1fr_1.3fr] gap-8 lg:gap-12 items-center">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+          className="glass p-5 sm:p-7 flex flex-col sm:flex-row gap-5 sm:gap-7 items-start">
           {/* Photo */}
-          <motion.div initial={{ opacity: 0, x: -30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6 }}>
-            <div className="relative aspect-[3/4] sm:aspect-[4/5] rounded-2xl overflow-hidden border border-white/[0.06]">
-              <Image src="/author.jpg" alt="Елена — автор курса" fill
-                className="object-cover" sizes="(max-width:1024px) 100vw, 45vw" />
-            </div>
-          </motion.div>
+          <div className="w-full sm:w-40 md:w-48 shrink-0 aspect-square sm:aspect-[3/4] rounded-xl overflow-hidden relative border border-white/[0.06]">
+            <Image src="/author.jpg" alt={AUTHOR.name} fill className="object-cover" sizes="(max-width:640px) 100vw, 200px" />
+          </div>
 
           {/* Content */}
-          <motion.div initial={{ opacity: 0, x: 30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6, delay: 0.1 }}>
-            <p className="label mb-3">Автор курса</p>
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-4">Елена</h2>
-
-            <div className="space-y-3 mb-6">
-              <p className="text-sm text-white/45 leading-relaxed">
-                Практикующий мастер с 10-летним стажем. Работаю с гелем,
-                верхними формами и архитектурным опилом — техникой, которая
-                даёт принципиально другой уровень прочности и визуала.
-              </p>
-              <p className="text-sm text-white/45 leading-relaxed">
-                Несколько лет назад полностью перешла с гель-лака на гель —
-                и это изменило мою работу, мой чек и качество результата.
-                Теперь я передаю эту технику.
-              </p>
-              <p className="text-sm text-white/45 leading-relaxed">
-                Это не школа на потоке. Это авторский курс с фокусом на
-                глубину техники, постановку руки и точный, повторяемый результат.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-2">
-              {["Диплом инструктора гос. образца", "10 лет практики", "Действующий мастер"].map((b) => (
-                <span key={b}
-                  className="px-3 py-1.5 text-[11px] font-medium text-white/50 bg-white/[0.04] border border-white/[0.06] rounded-lg">
-                  {b}
-                </span>
+          <div className="flex-1 min-w-0">
+            <p className="label mb-2">{AUTHOR.label}</p>
+            <h2 className="text-xl font-black mb-3">{AUTHOR.name}</h2>
+            <p className="text-[13px] sm:text-sm muted leading-relaxed mb-4">{AUTHOR.bio}</p>
+            <div className="flex flex-wrap gap-1.5">
+              {AUTHOR.facts.map(f => (
+                <span key={f} className="px-2.5 py-1 text-[10px] sm:text-[11px] font-medium muted-soft bg-white/[0.04] border border-white/[0.06] rounded-lg">{f}</span>
               ))}
             </div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
