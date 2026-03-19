@@ -3,10 +3,9 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Авторский курс маникюра — гель, верхние формы, опил | Москва",
-  description:
-    "Очное обучение современной технике: гель, верхние формы, архитектурный опил. Курс с нуля и повышение квалификации. Москва.",
+  description: "Очное обучение современной технике. Гель, верхние формы, архитектурный опил. С нуля и повышение квалификации.",
   openGraph: {
-    title: "Современная техника маникюра — очный авторский курс",
+    title: "Сильная гелевая техника — очный авторский курс",
     description: "Гель · Верхние формы · Опил. Очно в Москве.",
     type: "website",
     locale: "ru_RU",
@@ -20,10 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
       </head>
       <body>{children}</body>
     </html>
