@@ -10,59 +10,47 @@
 
   html {
     scroll-behavior: smooth;
-    background-color: #0a0a0b;
-    color: #ffffff;
+    background-color: #08080a;
+    color: #f0f0f2;
   }
 
   body {
-    font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont,
-      sans-serif;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
     overflow-x: hidden;
   }
 
   ::selection {
-    background-color: rgba(255, 45, 123, 0.3);
+    background-color: rgba(255, 45, 123, 0.25);
     color: #ffffff;
   }
 
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #0a0a0b;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #2a2a30;
-    border-radius: 3px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #ff2d7b;
-  }
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: #08080a; }
+  ::-webkit-scrollbar-thumb { background: #222228; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #ff2d7b; }
 }
 
 @layer components {
-  .glass-card {
-    @apply bg-surface-card/80 backdrop-blur-xl border border-surface-border/50 rounded-2xl;
+  .glass {
+    @apply bg-white/[0.04] backdrop-blur-xl border border-white/[0.06] rounded-2xl;
   }
 
   .text-gradient {
-    @apply bg-gradient-accent bg-clip-text text-transparent;
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #FF2D7B 0%, #FF6B9D 50%, #FF2D7B 100%);
   }
 
   .btn-primary {
-    @apply relative overflow-hidden bg-gradient-accent text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,45,123,0.4)] hover:scale-[1.02] active:scale-[0.98];
+    @apply relative overflow-hidden font-semibold rounded-xl transition-all duration-300
+           hover:shadow-[0_0_40px_rgba(255,45,123,0.3)] hover:scale-[1.02] active:scale-[0.98];
+    background: linear-gradient(135deg, #FF2D7B 0%, #e0175f 100%);
   }
 
   .btn-primary::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.1),
-      transparent
-    );
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
     transform: translateX(-100%);
     transition: transform 0.6s ease;
   }
@@ -70,19 +58,22 @@
     transform: translateX(100%);
   }
 
-  .section-padding {
-    @apply px-5 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32;
+  .section-y {
+    @apply py-16 sm:py-20 lg:py-24;
   }
 
-  .container-narrow {
-    @apply max-w-6xl mx-auto;
+  .section-x {
+    @apply px-5 sm:px-6 lg:px-8;
   }
 
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
+  .wrap {
+    @apply max-w-5xl mx-auto;
   }
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+  .label {
+    @apply text-xs font-semibold uppercase tracking-[0.15em] text-[#FF2D7B];
   }
 }
