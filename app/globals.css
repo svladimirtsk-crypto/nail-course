@@ -3,77 +3,58 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  :root {
+    --accent: 255 45 123;
+    --bg: 8 8 10;
+    --surface: 255 255 255;
   }
-
-  html {
-    scroll-behavior: smooth;
-    background-color: #08080a;
-    color: #f0f0f2;
-  }
-
-  body {
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-    overflow-x: hidden;
-  }
-
-  ::selection {
-    background-color: rgba(255, 45, 123, 0.25);
-    color: #ffffff;
-  }
-
-  ::-webkit-scrollbar { width: 5px; }
-  ::-webkit-scrollbar-track { background: #08080a; }
-  ::-webkit-scrollbar-thumb { background: #222228; border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: #ff2d7b; }
+  * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  html { scroll-behavior: smooth; background: rgb(var(--bg)); color: #ededed; }
+  body { font-family: "Inter", -apple-system, sans-serif; overflow-x: hidden; }
+  ::selection { background: rgb(var(--accent) / 0.2); color: #fff; }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: rgb(var(--bg)); }
+  ::-webkit-scrollbar-thumb { background: rgb(var(--surface) / 0.08); border-radius: 2px; }
 }
 
 @layer components {
+  /* ── layout ── */
+  .wrap { @apply max-w-5xl mx-auto; }
+  .sx { @apply px-5 sm:px-6 lg:px-8; }
+  .sy { @apply py-14 sm:py-18 lg:py-22; }
+
+  /* ── glass card ── */
   .glass {
-    @apply bg-white/[0.04] backdrop-blur-xl border border-white/[0.06] rounded-2xl;
+    @apply rounded-2xl border;
+    background: rgb(var(--surface) / 0.03);
+    border-color: rgb(var(--surface) / 0.06);
   }
 
-  .text-gradient {
+  /* ── accent gradient text ── */
+  .tg {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, #FF2D7B 0%, #FF6B9D 50%, #FF2D7B 100%);
+    background-image: linear-gradient(135deg, rgb(var(--accent)), #ff6b9d);
   }
 
-  .btn-primary {
-    @apply relative overflow-hidden font-semibold rounded-xl transition-all duration-300
-           hover:shadow-[0_0_40px_rgba(255,45,123,0.3)] hover:scale-[1.02] active:scale-[0.98];
-    background: linear-gradient(135deg, #FF2D7B 0%, #e0175f 100%);
-  }
-
-  .btn-primary::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
-    transform: translateX(-100%);
-    transition: transform 0.6s ease;
-  }
-  .btn-primary:hover::after {
-    transform: translateX(100%);
-  }
-
-  .section-y {
-    @apply py-16 sm:py-20 lg:py-24;
-  }
-
-  .section-x {
-    @apply px-5 sm:px-6 lg:px-8;
-  }
-
-  .wrap {
-    @apply max-w-5xl mx-auto;
-  }
-
-  .scrollbar-hide::-webkit-scrollbar { display: none; }
-  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-
+  /* ── section label ── */
   .label {
-    @apply text-xs font-semibold uppercase tracking-[0.15em] text-[#FF2D7B];
+    @apply text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em];
+    color: rgb(var(--accent));
   }
+
+  /* ── primary button ── */
+  .btn {
+    @apply relative overflow-hidden font-semibold rounded-xl transition-all duration-300;
+    background: linear-gradient(135deg, rgb(var(--accent)), #d91a63);
+  }
+  .btn:hover { box-shadow: 0 0 36px rgb(var(--accent) / 0.3); transform: scale(1.02); }
+  .btn:active { transform: scale(0.98); }
+
+  /* ── muted text readable on dark ── */
+  .muted { color: rgb(var(--surface) / 0.50); }
+  .muted-soft { color: rgb(var(--surface) / 0.35); }
+
+  /* ── scrollbar hide ── */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 }
