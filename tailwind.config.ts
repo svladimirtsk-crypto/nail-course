@@ -16,6 +16,10 @@ const config: Config = {
           dark: "#D91A63",
           glow: "rgba(255, 45, 123, 0.4)",
         },
+        spacing: {
+  '18': '4.5rem',
+  '22': '5.5rem',
+},
         surface: {
           DEFAULT: "#0A0A0B",
           card: "#131316",
