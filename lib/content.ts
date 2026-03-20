@@ -86,7 +86,7 @@ export const PROGRAM_DATA: Record<"beginner" | "pro", { tab: string; modules: Pr
     modules: [
       {
         id: "b1",
-        num: "01",
+        num: "1",
         title: "Основы и подготовка",
         tagline: "Материалы, безопасность, подготовка пластины",
         learn: [
@@ -104,7 +104,7 @@ export const PROGRAM_DATA: Record<"beginner" | "pro", { tab: string; modules: Pr
       },
       {
         id: "b2",
-        num: "02",
+        num: "2",
         title: "Аппаратный маникюр",
         tagline: "Фрезы, обороты, техника обработки кутикулы",
         learn: [
@@ -122,7 +122,7 @@ export const PROGRAM_DATA: Record<"beginner" | "pro", { tab: string; modules: Pr
       },
       {
         id: "b3",
-        num: "03",
+        num: "3",
         title: "Гель и верхние формы",
         tagline: "Выкладка, архитектура, работа с формами",
         learn: [
@@ -141,7 +141,7 @@ export const PROGRAM_DATA: Record<"beginner" | "pro", { tab: string; modules: Pr
       },
       {
         id: "b4",
-        num: "04",
+        num: "4",
         title: "Архитектурный опил",
         tagline: "Форма, баланс, прочность через точный опил",
         learn: [
@@ -160,7 +160,7 @@ export const PROGRAM_DATA: Record<"beginner" | "pro", { tab: string; modules: Pr
       },
       {
         id: "b5",
-        num: "05",
+        num: "5",
         title: "Покрытие, дизайн и полный цикл",
         tagline: "Цвет, дизайн, экзаменационная работа",
         learn: [
@@ -184,7 +184,7 @@ export const PROGRAM_DATA: Record<"beginner" | "pro", { tab: string; modules: Pr
     modules: [
       {
         id: "p1",
-        num: "01",
+        num: "1",
         title: "Переход на гель и верхние формы",
         tagline: "Материаловедение и новая техника выкладки",
         learn: [
@@ -202,7 +202,7 @@ export const PROGRAM_DATA: Record<"beginner" | "pro", { tab: string; modules: Pr
       },
       {
         id: "p2",
-        num: "02",
+        num: "2",
         title: "Архитектурный опил",
         tagline: "Опил сверху и изнутри — прочность и форма",
         learn: [
@@ -220,7 +220,7 @@ export const PROGRAM_DATA: Record<"beginner" | "pro", { tab: string; modules: Pr
       },
       {
         id: "p3",
-        num: "03",
+        num: "3",
         title: "Разбор работ и практика",
         tagline: "Анализ ошибок, практика на модели, сертификат",
         learn: [
